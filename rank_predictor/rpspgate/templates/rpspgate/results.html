@@ -1,0 +1,101 @@
+{% extends 'rpspgate/base.html' %}
+{% block 'head_content' %}
+<style type="text/css">
+	.results-data{
+		width: 20%;
+		text-align: center;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	th{
+		background: black;
+		color: white;
+	}
+	td{
+		color: black;
+		background: white;
+	}
+	.results-row{
+		border-bottom: 1px solid black;
+	}
+</style>
+<script type="text/javascript">
+	window.onbeforeunload = function() {
+        return "You will be taken back to the index page, sure?";
+    };
+</script>
+{% endblock %}
+{% block 'body_content' %}
+<div class="container mt-5 pb-2 justify-content-center" style="color: blue">Marking is according to the response sheet order</div>
+<div class="container mt-2 results-table justify-content-center">
+	<table style="width: 100%;">
+		<tr class="results-row">
+			<th class="results-data">
+				Q.No
+			</th>
+			<th class="results-data">
+				Attempt
+			</th>
+			<th class="results-data">
+				Correct Ans.
+			</th>
+			<th class="results-data">
+				Marks
+			</th>
+			<th class="results-data">
+				Obt. Marks
+			</th>
+		</tr>
+		{% for item in context %}
+		<tr class="results-row">
+			<td class="results-data">
+				{{ item.0 }}
+			</td>
+			<td class="results-data">
+				{{ item.1 }}
+			</td>
+			<td class="results-data">
+				{{ item.2 }}
+			</td>
+			<td class="results-data">
+				{{ item.3 }}
+			</td>
+			<td class="results-data">
+				{% if item.4 == 0 %}
+					<span style="color:gray"> {{ item.4 }} </span>
+				{% elif item.4 < 0 %}
+					<span style="color:red"> {{ item.4 }} </span>
+				{% else %}
+					<span style="color:green"> {{ item.4 }} </span>
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+		<tr class="results-row">
+			<td class="results-data" colspan="4">
+				<b>Positive marks</b>
+			</td>
+			<td class="results-data">
+				{{ Total_pos }}
+			</td>
+		</tr>
+		<tr class="results-row">
+			<td class="results-data" colspan="4">
+				<b>Negative marks</b>
+			</td>
+			<td class="results-data">
+				{{ Total_neg }}
+			</td>
+		</tr>
+		<tr class="results-row">
+			<td class="results-data" colspan="4">
+				<b>TOTAL MARKS</b>
+			</td>
+			<td class="results-data">
+				{{ Total_marks }}
+			</td>
+		</tr>
+	</table>
+</div>
+<a class="link-info" href="{% url 'index' %}">Check Another</a>
+{% endblock %}

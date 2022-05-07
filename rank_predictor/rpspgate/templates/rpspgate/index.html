@@ -1,0 +1,19 @@
+{% extends 'rpspgate/base.html' %}
+{% block 'body_content' %}
+<div class="container mt-5 pt-2 pb-3" style="border: 1px solid gray; border-radius: 10px;">
+	<div class="row pb-2">
+		<b style="color:red;">Update: Gate Official Answer keys used</b>
+	</div>
+	<div class="row pb-4">
+		<b style="color:green;">Currently for CS and EC branches</b>
+	</div>
+	<div class="row">
+		<form method="POST">
+		{% csrf_token %}
+		<input style="width: 80%; height: 2.5rem; outline: none; border: 0px solid white; border-bottom: 2px solid blue;" type="text" name="link" placeholder="Enter response sheet link">
+		<button class="btn btn-primary mt-lg-0 mt-md-3" type="submit">Check score and Rank</button>
+	</form>
+	</div>
+</div>
+<div style="position: absolute; bottom: 0px; width: 100%; text-align: center;">&copy; <b><u>ShPr Org.</u></b></div>
+{% endblock %}
